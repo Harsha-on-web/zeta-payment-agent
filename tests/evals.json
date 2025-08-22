@@ -1,0 +1,57 @@
+[
+  {
+    "description": "Should allow a standard, low-value transaction",
+    "payload": {
+      "customerId": "cust_123",
+      "amount": 100,
+      "currency": "USD",
+      "payeeId": "payee_456",
+      "idempotencyKey": "eval-test-1"
+    },
+    "expectedDecision": "allow"
+  },
+  {
+    "description": "Should block a transaction due to insufficient funds",
+    "payload": {
+      "customerId": "cust_123",
+      "amount": 9999,
+      "currency": "USD",
+      "payeeId": "payee_456",
+      "idempotencyKey": "eval-test-2"
+    },
+    "expectedDecision": "block"
+  },
+  {
+    "description": "Should send a high-value transaction for review",
+    "payload": {
+      "customerId": "cust_123",
+      "amount": 1500,
+      "currency": "USD",
+      "payeeId": "payee_456",
+      "idempotencyKey": "eval-test-3"
+    },
+    "expectedDecision": "review"
+  },
+  {
+    "description": "Should block a transaction for a non-existent customer",
+    "payload": {
+      "customerId": "cust_999",
+      "amount": 50,
+      "currency": "USD",
+      "payeeId": "payee_456",
+      "idempotencyKey": "eval-test-4"
+    },
+    "expectedDecision": "block"
+  },
+  {
+    "description": "Should allow another standard transaction",
+    "payload": {
+      "customerId": "cust_123",
+      "amount": 50,
+      "currency": "USD",
+      "payeeId": "payee_456",
+      "idempotencyKey": "eval-test-5"
+    },
+    "expectedDecision": "allow"
+  }
+]
